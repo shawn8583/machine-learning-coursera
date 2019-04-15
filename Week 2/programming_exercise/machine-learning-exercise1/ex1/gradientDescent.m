@@ -18,9 +18,9 @@ for iter = 1:num_iters
     %
 
 hypothsis = X*theta;
-square_errors = (hypothsis -y).^2;
-theta(1) = theta(1) - alpha*(1/m)*(sum(square_errors*X(:, 1)));
-theta(2) = theta(2) - alpha*(1/m)*(sum(square_errors*X(:, 2)));
+errors = (hypothsis -y);
+theta(1) = theta(1) - alpha*(1/m)*(sum( errors.*X(:, 1) ));
+theta(2) = theta(2) - alpha*(1/m)*(sum( errors.*X(:, 2) ));
 
 
 
