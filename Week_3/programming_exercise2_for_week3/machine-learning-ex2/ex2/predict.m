@@ -15,10 +15,19 @@ p = zeros(m, 1);
 %               You should set p to a vector of 0's and 1's
 %
 
+p = sigmoid(X * theta);
+% p is a matrix, to replace p values with zeros and ones
+% cannot be done by "if else"
+% if p >= 0.5
+%     p = 1
+% else 
+%     p = 0
+% end 
 
-
-
-
+% following two lines mean that replace p values with
+% zeros and ones
+p( p >= 0.5 ) = 1;
+p( p < 0.5) = 0;
 
 
 % =========================================================================
