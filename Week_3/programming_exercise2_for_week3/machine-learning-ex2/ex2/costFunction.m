@@ -25,6 +25,7 @@ grad = zeros(size(theta));
 % grad = (1/m) * sum(sigmoid((X*theta) - y)*X); 
 
 % ------------- Note and Explaination of my code ------------
+% By Shawn
 % The implementation of the code is better to use Vectorization techniques 
 % mentioned in "Vectorization" in "Octave/Matlab Tutorial" in Week 2
 
@@ -40,7 +41,8 @@ grad = zeros(size(theta));
 % The two lines of J and gradient are still not right (2019.4.26), currently I still cannot fully figure
 % out all the details of the implementation of Cost Function in Octave, come back later.
 
-% The following two lines are refenerce from the internet:
+% for a very good explaination of everything about the following two line of code, go to folder of programming_exercise3 in Week4, page 4 and 5 under chapter 1.3 Vectorizing Logistic Regression in ex3.pdf,
+% ***** there's a very good explaination for everything about the implementation of CostFunction. it should help understand this if somehow forgot.
 J = (1/m) * (y' * log(sigmoid(X*theta)) - (1-y)' * log(1 - sigmoid(X*theta)));
 grad = (1/m) * X' * (sigmoid(X*theta) - y);
 
