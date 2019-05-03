@@ -20,21 +20,29 @@ grad = zeros(size(theta));
 % this part I used a for loop to generate a theta_reg that theta0 = 0 so the theta0
 % will not be regularized in the last term of J
 % that means theta_reg = [0; theta1; theta2; theta3; theta4; ......]
-a = [theta(1,1)];
+% a = [theta(1,1)];
 
-for i = 1 : (size(theta)(1,1) - 1)
-    a = [a; 0];
-end
+% for i = 1 : (size(theta)(1,1) - 1)
+%     a = [a; 0];
+% end
 
-theta_reg = theta - a;
+% theta_reg = theta - a;
 
-% Now computes J and gradient, these are similiar from CostFunction.m
-J = (1/m) * (y' * log(sigmoid(X*theta_reg)) - (1-y)' * log(1 - sigmoid(X*theta_reg))) + (lambda/(2*m)) * (theta_reg*(theta_reg'));
-grad0 = (1/m) * X' * (sigmoid(X*theta - y));     % compute gradient value for theta0
-grad_rest = (1/m) * X' * (sigmoid(X*theta_reg - y)) + (lambda/m)*theta_reg;       % compute gradient value for theta other than theta0
+% % Now computes J and gradient, these are similiar from CostFunction.m
+% J = (1/m) * (y' * log(sigmoid(X*theta_reg)) - (1-y)' * log(1 - sigmoid(X*theta_reg))) + (lambda/(2*m)) * (theta_reg*(theta_reg'));
+% grad0 = (1/m) * X' * (sigmoid(X*theta - y));     % compute gradient value for theta0
+% grad_rest = (1/m) * X' * (sigmoid(X*theta_reg - y)) + (lambda/m)*theta_reg;       % compute gradient value for theta other than theta0
 
-grad_rest(1,:) = [];     % delete the unit where theta0 was computed in the wrong way
-grad_reg = [grad0; grad_rest];      % compose the values for j = 0 and for j >= 1
+% grad_rest(1,:) = [];     % delete the unit where theta0 was computed in the wrong way
+% grad_reg = [grad0; grad_rest];      % compose the values for j = 0 and for j >= 1
+
+% This is the correct code and I've figured it out by doing week4's programming exercise
+theta_to_reg = theta;
+theta_to_reg(1, 1) = 0;
+J = (1/m) * (-y' * log(sigmoid(X * theta)) - (1 - y)' * log(1-sigmoid(X * theta))) + (lambda/(2*m)) * sum(power(theta_to_reg, 2));
+% power (x, y) : Return the element-by-element operation of x raised to the y power. This function and x .^ y are equivalent.
+
+grad = (1/m) * (X' * ( sigmoid(X * theta) - y )) + (lambda/m) * theta_to_reg
 
 
 % =============================================================
